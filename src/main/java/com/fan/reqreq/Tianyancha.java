@@ -32,12 +32,11 @@ public class Tianyancha {
 
     public static void main(String[] args) {
         String excelFilePath = "/ISV.xlsx"; // 修改为你的Excel文件路径
-//        findCompanyInfo("移动");
         readISVNames(excelFilePath);
     }
     public static Map<String, String> findCompanyInfo(String company){
         String URL = "http://open.api.tianyancha.com/services/open/ic/baseinfo/normal?keyword=";
-        String TOKEN = "871bf862-2598-4161-bf48-4a3205637722";
+        String TOKEN = "";
         Map<String, String> map = new HashMap<>();
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(URL + company);
@@ -59,6 +58,7 @@ public class Tianyancha {
                 map.put("province", province);
                 map.put("regCapital", regCapital);
                 String logFilePath = company + ".txt";
+                System.out.println(result);
                 writeLog(result, logFilePath);
             }
         } catch (IOException e) {
